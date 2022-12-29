@@ -1,0 +1,334 @@
+#+TITLE: Emacs config
+#+AUTHOR: Mukhammad Ilkhomov
+
+* Package manage ent
+
+
+** Setup package.el
+
+#+begin_src emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+  (package-refresh-contents)
+  (package-initialize)
+#+end_src
+
+
+** Installing use-package
+
+#+begin_src emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+#+end_src
+
+
+* GUI settings
+
+
+** Theme
+
+#+begin_src emacs-lisp
+  (use-package dracula-theme
+    :ensure t
+    :config
+    (load-theme 'dracula t))
+#+end_src
+
+
+** Fonts
+
+#+begin_src emacs-lisp
+  (set-face-attribute 'default nil
+    :font "Hack 10"
+    :weight 'medium)
+#+end_src
+
+
+* Basic editor settings
+
+** Line numbers
+
+#+begin_src emacs-lisp
+  (global-display-line-numbers-mode)
+#+end_src
+
+
+** Highlight line
+
+#+begin_src emacs-lisp
+  (global-hl-line-mode)
+#+end_src
+
+
+** Indentation
+
+#+begin_src emacs-lisp
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 4)
+#+end_src
+
+*** indent-guide
+
+#+begin_src emacs-lisp
+  (use-package indent-guide
+    :ensure t
+    :config
+    (indent-guide-global-mode))
+#+end_src
+
+
+** Text width
+
+#+begin_src emacs-lisp
+  (setq-default fill-column 80)
+  (setq-default display-fill-column-indicator t)
+  (setq-default display-fill-column-indicator-character ?\u2502)
+#+end_src
+
+
+** Show trainling spaces
+
+#+begin_src emacs-lisp
+  (setq-default show-trailing-whitespace t)
+#+end_src
+
+
+** Disable autosave and backup
+
+#+begin_src emacs-lisp
+  (setq-default make-backup-files nil)
+  (setq-default auto-save-default nil)
+#+end_src
+
+** Tab bar
+
+#+begin_src emacs-lisp
+  (setq-default tab-bar-mode t)
+#+end_src
+
+
+** Turn off menu, toolbar and scrollbar
+
+#+begin_src emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+#+end_src
+
+
+** Zooming in and out
+
+#+begin_src emacs-lisp
+  (define-key global-map (kbd "C-=") 'text-scale-increase)
+  (define-key global-map (kbd "C--") 'text-scale-decrease)
+#+end_src
+
+
+** Scroll step
+
+#+begin_src emacs-lisp
+  (setq-default scroll-step 1)
+#+end_src
+
+
+* Basic key-bindings
+
+** evil
+
+#+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-vsplit-window-right t)
+    (setq evil-split-window-below t)
+    :config
+    (evil-mode))
+  (use-package evil-collection
+    :after evil
+    :ensure t
+    :config
+    (evil-collection-init))
+#+end_src
+
+** key-chord
+
+#+begin_src emacs-lisp
+  (use-package key-chord
+    :ensure t
+    :config
+    (key-chord-mode))
+#+end_src
+
+** general
+
+#+begin_src emacs-lisp
+  (use-package general
+    :ensure t
+    :config
+    (general-evil-setup))
+#+end_src
+
+
+** Key-bindings
+
+#+begin_src emacs-lisp
+  (evil-set-leader '(normal motion) (kbd "<SPC>"))
+
+  (general-imap "j"
+    (general-key-dispatch 'self-insert-command
+      :timeout 0.25
+      "k" 'evil-normal-state))
+
+  (general-define-key
+   :states '(normal visual)
+   :keymaps 'global
+   :prefix "<leader>"
+   "SPC" 'execute-extended-command
+   "c r" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
+   "t n" 'tab-new
+   "t c" 'tab-close
+   "t h" 'tab-previous
+   "t l" 'tab-next
+   "w h" 'windmove-left
+   "w l" 'windmove-right
+   "w j" 'windmove-down
+   "w k" 'windmove-up
+   "s v" 'split-window-vertically
+   "s h" 'split-window-horizontally
+   "b b" 'ivy-switch-buffer
+   "b l" 'list-buffers
+   "b k" 'kill-buffer
+   "r p" 'point-to-register
+   "r j" 'jump-to-register
+   "r c" 'copy-to-register
+   "r i" 'insert-register
+   "r m s" 'bookmark-set
+   "r m j" 'bookmark-jump
+   "r m l" 'list-bookmarks
+   "e" 'find-file
+   "i" 'imenu
+  )
+
+  (general-define-key
+   :states 'insert
+   :keymaps 'global
+   :prefix "C-c"
+   "q" 'evil-normal-state)
+
+  (general-define-key
+   :states '(normal insert)
+   :keymaps 'global
+   :prefix "C-c"
+   "s" 'toggle-input-method)
+#+end_src
+
+
+* Help
+
+** Which key
+
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t
+    :config
+    (which-key-mode))
+#+end_src
+
+
+* Minibuffer
+
+** ivy
+
+#+begin_src emacs-lisp
+  (use-package ivy
+    :ensure t
+    :config
+    (ivy-mode))
+#+end_src
+
+* Autocomplete
+
+** auto-compete
+
+#+begin_src emacs-lisp
+  (use-package auto-complete
+    :ensure t
+    :config
+    (ac-config-default)
+  )
+#+end_src
+
+
+* Org mode
+
+** Config
+#+begin_src emacs-lisp
+  (add-to-list 'org-latex-packages-alist
+               '("AUTO" "babel" t ("pdflatex")))
+
+  (general-define-key
+   :keymaps 'org-mode-map
+   "TAB" 'org-cycle)
+
+  (add-hook 'org-mode-hook
+            (lambda () (setq display-fill-column-indicator nil)))
+
+  (setq-default org-src-preserve-indentation nil)
+#+end_src
+
+
+** org-agenda
+#+begin_src emacs-lisp
+  (setq-default org-agenda-files '("~/Org"))
+#+end_src
+
+
+** org-roam
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :config
+    (setq-default org-roam-directory (file-truename "~/Org"))
+    (org-roam-db-autosync-mode)
+  )
+
+  (general-define-key
+   :prefix "<leader>"
+   :keymaps 'org-mode-map
+   "o r n" 'org-roam-node-insert
+   "o r t" 'org-roam-buffer-toggle)
+#+end_src
+
+
+** org-roam-ui
+#+begin_src emacs-lisp
+  (use-package org-roam-ui :ensure t)
+#+end_src
+
+
+* Tex
+
+#+begin_src emacs-lisp
+  (use-package tex :ensure auctex)
+
+  (setq-default TeX-auto-save t)
+  (setq-default TeX-parse-self t)
+  (setq-default TeX-engine 'xetex)
+  (setq-default TeX-view-program-selection
+      '((output-pdf "Okular"))
+  )
+  (setq-default font-latex-fontify-script nil)
+  (add-hook 'LaTeX-mode-hook (lambda ()
+      (setq display-fill-column-indicator nil)
+  ))
+
+  (custom-set-faces '(preview-reference-face ((t (:background "white")))))
+#+end_src
+
+* Input method
+
+#+begin_src emacs-lisp
+  (setq-default default-input-method "russian-computer")
+#+end_src

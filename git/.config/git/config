@@ -1,0 +1,14 @@
+[user]
+	email = ilkhomovmukhammad8128@gmail.com
+	name = Mukhammad Ilkhomov
+	signingKey = 499F21C392AC4B04
+[pull]
+	rebase = no
+[gpg]
+	program = gpg2
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
+[safe]
+	directory = /opt/flutter

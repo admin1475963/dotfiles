@@ -1,0 +1,8 @@
+[Unit]
+Description=ydotool
+
+[Service]
+ExecStart=ydotoold
+
+[Install]
+WantedBy=default.target
