@@ -31,7 +31,6 @@ alias ls lsd
 alias tlmgr "/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode"
 
 # Aliases for user local apps
-alias dotfiles "git --git-dir=$HOME/.cfg --work-tree=$HOME"
 alias docker-credential-pass 'pass'
 alias htim "$LOCAL_APPS/htop-vim/bin/htop"
 alias conda-switch 'eval /home/admin1475963/Applications/anaconda3/bin/conda "shell.fish" "hook" $argv | source'
