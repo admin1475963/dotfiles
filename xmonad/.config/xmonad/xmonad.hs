@@ -61,9 +61,9 @@ myManageHook = composeAll [
     className =? "Emacs" --> doShift "2"
     , className =? "okular" --> doShift "3"
     , className =? "Brave-browser" --> doShift "4"
-    , className =? "TelegramDesktop" --> doShift "5"
-    , className =? "thunderbird" --> doShift "5"
-    , className =? "zoom" --> doShift "6"
+    , className =? "TelegramDesktop" --> doShift "6"
+    , className =? "thunderbird" --> doShift "6"
+    , className =? "zoom" --> doShift "7"
     ]
 ------------------------------------------------------------------------
 -- StartupHook
@@ -112,7 +112,7 @@ myKeys = [
     , ("M-<Return>", spawn myTerminal)
 
     -- Passwords
-    , ("M-p", spawn "pass.sh")
+    , ("M-C-p", spawn "pass.sh")
 
     -- Launch emacs
     , ("M-e", spawn "emacsclient -c -a 'emacs'")
@@ -122,9 +122,6 @@ myKeys = [
 
     -- Restart emacs daemon
     , ("M-C-e", spawn "killall emacs; emacs --daemon > /tmp/emacs.log")
-
-    -- Restart kmonad
-    , ("M-C-k", spawn "killall kmonad; kmonad ~/.config/kmonad/main.kbd")
 
     -- Lock screen
     , ("M-C-l", spawn "lock.sh")
@@ -136,7 +133,7 @@ myKeys = [
     , ("M-C-m", spawn "thunderbird")
 
     -- Screenshot
-    , ("M-C-p", spawn "flameshot gui")
+    , ("M-C-s", spawn "flameshot gui")
 
     -- Move mouse
     , ("M-<Left>", spawn "xdotool mousemove_relative -- -10 0")

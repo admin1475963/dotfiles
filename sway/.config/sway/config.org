@@ -1,5 +1,5 @@
 #+TITLE: Sway config
-#+PROPERTY: header-args :tangle config
+#+PROPERTY: header-args :tangle /home/admin1475963/.config/sway/config
 
 * Main variables
 
