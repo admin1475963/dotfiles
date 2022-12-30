@@ -13,8 +13,6 @@
   cu  (tap-macro C-a (pause 20) u)
   ci  (tap-macro C-a (pause 20) i)
   cw  (tap-macro C-a (pause 20) w)
-  cs  (tap-macro C-c (pause 20) s)
-  cq  (tap-macro C-c (pause 20) q)
   ca  M-spc
 )
 
@@ -36,8 +34,8 @@
 
 (deflayer additional
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    @cq  @cw  _    _    _    _    @cu  @ci  _    _    _    _    _
-  _    @ca  @cs  _    _    _    @ch  @cj  @ck  @cl  _    _    _
+  _    _    @cw  _    _    _    _    @cu  @ci  _    _    _    _    _
+  _    @ca  _    _    _    _    @ch  @cj  @ck  @cl  _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _              _              _    _
 )

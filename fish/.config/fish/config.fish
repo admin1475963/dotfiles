@@ -1,5 +1,10 @@
+# guix
+set -gx GUIX_PROFILE "$HOME/.guix-profile"
+set fish_function_path $fish_function_path "$GUIX_PROFILE/share/fish/functions"
+fenv source "$GUIX_PROFILE/etc/profile"
+
 # Environment variables
-set -gx PATH $HOME/.local/bin $HOME/Applications $PATH
+set -gx PATH $HOME/.local/bin $PATH
 set -gx EDITOR "emacsclient -c -a 'emacs'"
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
@@ -39,7 +44,6 @@ if status is-login && test -z $TMUX
    emacs --daemon &> /tmp/emacs.log &
    if test -z $DISPLAY
       if test $XDG_VTNR = 1
-         set -gx QT_QPA_PLATFORM wayland
          sway --unsupported-gpu
       else if test $XDG_VTNR = 2
          startx "$XDG_CONFIG_HOME/X11/xinitrc" --

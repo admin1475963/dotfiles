@@ -210,18 +210,6 @@
    "e" 'find-file
    "i" 'imenu
   )
-
-  (general-define-key
-   :states 'insert
-   :keymaps 'global
-   :prefix "C-c"
-   "q" 'evil-normal-state)
-
-  (general-define-key
-   :states '(normal insert)
-   :keymaps 'global
-   :prefix "C-c"
-   "s" 'toggle-input-method)
 #+end_src
 
 
@@ -272,10 +260,17 @@
    :keymaps 'org-mode-map
    "TAB" 'org-cycle)
 
+  (general-define-key
+   :prefix "<leader>"
+   :keymaps 'org-mode-map
+   "o t" 'org-todo
+   )
+
   (add-hook 'org-mode-hook
             (lambda () (setq display-fill-column-indicator nil)))
 
   (setq-default org-src-preserve-indentation nil)
+  (setq-default org-catch-invisible-edits 'error)
 #+end_src
 
 
@@ -325,10 +320,4 @@
   ))
 
   (custom-set-faces '(preview-reference-face ((t (:background "white")))))
-#+end_src
-
-* Input method
-
-#+begin_src emacs-lisp
-  (setq-default default-input-method "russian-computer")
 #+end_src
