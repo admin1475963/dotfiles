@@ -19,6 +19,7 @@ Vim navigation keys:
 * Start other apps
 
 #+BEGIN_SRC conf-space
+  exec systemctl --user import-environment WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
   exec dunst &> /tmp/dunst.log
 #+END_SRC
 
@@ -199,7 +200,7 @@ Vim navigation keys:
           $mod+m      exec bemenu-run | xargs swaymsg exec --
           $mod+Ctrl+p exec pass.sh
           $mod+e      exec emacsclient -c -a 'emacs'
-          $mod+w      exec chromium
+          $mod+w      exec qutebrowser
           $mod+Ctrl+t exec telegram-desktop --
           $mod+Ctrl+m exec icedove
           $mod+Ctrl+z exec swaylock
@@ -212,9 +213,10 @@ Vim navigation keys:
 #+BEGIN_SRC conf-space
   assign [class="(E|e)macs"] workspace number 2
   assign [app_id="org.kde.okular"] workspace number 3
-  assign [app_id="chromium-browser"] workspace number 4
+  assign [app_id="qutebrowser.qutebrowser"] workspace number 4
   assign [app_id="libreoffice-*"] workspace number 5
   assign [app_id="org.inkscape.Inkscape"] workspace number 5
+  assign [app_id="xournalpp"] workspace number 5
   assign [class="Gimp"] workspace number 5
   assign [app_id="org.telegram.desktop"] workspace number 6
   assign [class="icedove-default"] workspace number 6
