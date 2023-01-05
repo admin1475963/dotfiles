@@ -60,9 +60,9 @@ myLayoutHook =
 myManageHook = composeAll [
     className =? "Emacs" --> doShift "2"
     , className =? "okular" --> doShift "3"
-    , className =? "Brave-browser" --> doShift "4"
+    , className =? "qutebrowser" --> doShift "4"
     , className =? "TelegramDesktop" --> doShift "6"
-    , className =? "thunderbird" --> doShift "6"
+    , className =? "icedove" --> doShift "6"
     , className =? "zoom" --> doShift "7"
     ]
 ------------------------------------------------------------------------
@@ -72,6 +72,7 @@ myStartupHook = do
     spawn     "feh --bg-scale $WALLPAPERS/current"
     spawnOnce "xmobar"
     spawnOnce "trayer --edge right --align center --widthtype request --height 20 --SetDockType true --SetPartialStrut true"
+    spawnOnce "dunst &> /tmp/dunst.log"
 ------------------------------------------------------------------------
 -- Keymaps
 myKeys = [
@@ -118,13 +119,10 @@ myKeys = [
     , ("M-e", spawn "emacsclient -c -a 'emacs'")
 
     -- Launch browser
-    , ("M-w", spawn "brave")
-
-    -- Restart emacs daemon
-    , ("M-C-e", spawn "killall emacs; emacs --daemon > /tmp/emacs.log")
+    , ("M-w", spawn "qutebrowser")
 
     -- Lock screen
-    , ("M-C-l", spawn "lock.sh")
+    , ("M-C-l", spawn "$XDG_CONFIG_HOME/.config/xmonad/lock.sh")
 
     -- Launch telegram
     , ("M-C-t", spawn "telegram-desktop --")

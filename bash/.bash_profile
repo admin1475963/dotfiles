@@ -1,7 +1,4 @@
-if [ -f ~/.bashrc ]
-then
-    source "$HOME/.bashrc"
-fi
+source "$HOME/.bashrc"
 
 if [ -z $DISPLAY ]
 then
@@ -14,7 +11,5 @@ then
    then
        export XDG_CURRENT_DESKTOP="xmonad"
        startx "$HOME/.config/X11/xinitrc" --
-    else
-        tty
-    fi
+   fi
 fi
