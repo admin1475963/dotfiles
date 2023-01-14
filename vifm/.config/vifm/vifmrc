@@ -166,7 +166,7 @@ command! reload :write | restart full
 " program.
 
 " Pdf
-filextype {*.pdf,*.djvu,*.epub,*.fb2},<application/pdf> okular %f &
+filextype {*.pdf,*.djvu,*.epub,*.fb2} okular %f &
 fileviewer {*.pdf},<application/pdf> pdftotext -nopgbrk %c -
 
 " PostScript

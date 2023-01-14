@@ -303,6 +303,21 @@
 #+END_SRC
 
 
+* Tree-sitter
+
+#+BEGIN_SRC emacs-lisp
+  (use-package tree-sitter :ensure t)
+  (use-package tree-sitter-langs :ensure t)
+  (global-tree-sitter-mode)
+#+END_SRC
+
+
+* Elglot
+
+#+BEGIN_SRC emacs-lisp
+  (use-package eglot :ensure t)
+#+END_SRC
+
 * Tex
 
 #+BEGIN_SRC emacs-lisp
