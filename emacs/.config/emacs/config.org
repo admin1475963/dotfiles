@@ -1,5 +1,7 @@
 #+TITLE: Emacs config
 #+AUTHOR: Mukhammad Ilkhomov
+#+PROPERTY: header-args :tangle /home/admin1475963/.config/emacs/init.el
+
 
 * Package manage
 
