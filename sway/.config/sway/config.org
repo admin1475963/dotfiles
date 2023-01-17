@@ -204,7 +204,7 @@ Vim navigation keys:
           $mod+Ctrl+t exec telegram-desktop --
           $mod+Ctrl+m exec icedove
           $mod+Ctrl+z exec swaylock
-          $mod+Ctrl+s exec grim $HOME/Pictures/screenshots/$(date +'%F_%T.png') -g $(slurp)
+          $mod+Ctrl+s exec "grim -g $(slurp) $HOME/Pictures/screenshots/$(date +'%F_%T.png')"
   }
 #+END_SRC
 
