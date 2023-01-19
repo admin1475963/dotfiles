@@ -1,7 +1,3 @@
-;; -*- mode: scheme; -*-
-;; This is an operating system configuration template
-;; for a "bare bones" setup, with no X11 display server.
-
 (use-modules (gnu bootloader grub-efi-bootloader)
              (nongnu packages linux)
              (nongnu system linux-initrd))
