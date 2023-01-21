@@ -242,7 +242,7 @@ Vim navigation keys:
       gaps 10
       height 20
       position top
-      status_command while $XDG_CONFIG_HOME/sway/swaybar.sh; do sleep 1; done
+      status_command while bash $XDG_CONFIG_HOME/sway/swaybar.sh; do sleep 1; done
       colors {
           statusline #ffffff
           background #323232
