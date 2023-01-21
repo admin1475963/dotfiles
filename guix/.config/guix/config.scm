@@ -1,18 +1,13 @@
-(use-modules (gnu bootloader grub-efi-bootloader)
-             (nongnu packages linux)
-             (nongnu system linux-initrd))
+(use-modules
+ (gnu bootloader grub-efi-bootloader)
+ (nongnu packages linux)
+ (nongnu system linux-initrd))
 
 (define md-ssd
   (mapped-device
    (source "vgssd")
    (target "vgssd-root")
    (type lvm-device-mapping))
-
-(define md-hdd
-  (mapped-device
-   (source "vghdd")
-   (target "vghdd-home")
-   (type lvm-device-mapping)))
 
 (define fs-root
   (file-system
@@ -39,10 +34,10 @@
 
 (define fs-home
   (file-system
-   (device "/dev/mapper/vghdd-home")
-   (mount-point "/")
+   (device "/dev/sdb2")
+   (mount-point "/home")
    (type "ext4")
-   (dependencies (list fs-root md-hdd))))
+   (dependencies (list fs-root))))
 
 (operating-system
   (kernel linux)
@@ -57,11 +52,12 @@
 
   (host-name "ADMIN1475963")
 
-  (mapped-devices (list md-ssd md-hdd))
+  (mapped-devices (list md-ssd))
 
   (file-systems (append
                  (list fs-root fs-boot fs-efi fs-home)
                  %base-file-systems))
+
   (swap-space (target "/home/swap") (dependencies (list fs-home)))
 
   (users (cons

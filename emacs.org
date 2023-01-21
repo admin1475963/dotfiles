@@ -255,9 +255,6 @@
 
 ** Config
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'org-latex-packages-alist
-               '("AUTO" "babel" t ("pdflatex")))
-
   (general-define-key
    :keymaps 'org-mode-map
    "TAB" 'org-cycle)
