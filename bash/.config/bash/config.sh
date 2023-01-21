@@ -11,8 +11,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 source "$XDG_CONFIG_HOME/guix/current/etc/profile"
-GUIX_PROFILE="$HOME/.guix-profile"
-source "$GUIX_PROFILE/etc/profile"
+source "$HOME/.guix-profile/etc/profile"
 export GUIX_LOCPATH="$GUIX_PROFILE/lib/locales"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
