@@ -1,8 +1,6 @@
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR="emacsclient -c -a 'emacs'"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-export LOCAL_APPS="$HOME/Applications"
 export WALLPAPERS="$HOME/Pictures/wallpapers"
 
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -11,7 +9,8 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 source "$XDG_CONFIG_HOME/guix/current/etc/profile"
-source "$HOME/.guix-profile/etc/profile"
+export GUIX_PROFILE="$HOME/.guix-profile"
+source "$GUIX_PROFILE/etc/profile"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export GTK_THEME="Arc-Dark"

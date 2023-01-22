@@ -5,7 +5,7 @@
 [pull]
 	rebase = no
 [gpg]
-	program = gpg2
+	program = gpg
 [commit]
 	gpgsign = true
 [init]
