@@ -12,7 +12,6 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 source "$XDG_CONFIG_HOME/guix/current/etc/profile"
 source "$HOME/.guix-profile/etc/profile"
-export GUIX_LOCPATH="$GUIX_PROFILE/lib/locales"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export GTK_THEME="Arc-Dark"

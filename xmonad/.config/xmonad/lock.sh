@@ -1,4 +1,3 @@
-#!/usr/bin/bash
 B='#00000000'  # blank
 C='#ffffff00'  # clear ish
 D='#00bbffff'  # default

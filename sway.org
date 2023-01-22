@@ -198,7 +198,7 @@ Vim navigation keys:
   bindsym --to-code {
           $mod+Return exec alacritty
           $mod+m      exec bemenu-run | xargs swaymsg exec --
-          $mod+Ctrl+p exec pass.sh
+          $mod+Ctrl+p exec bash pass.sh
           $mod+e      exec emacsclient -c -a 'emacs'
           $mod+w      exec qutebrowser
           $mod+Ctrl+t exec telegram-desktop --

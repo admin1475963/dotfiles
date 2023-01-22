@@ -122,7 +122,7 @@ myKeys = [
     , ("M-w", spawn "qutebrowser")
 
     -- Lock screen
-    , ("M-C-l", spawn "$XDG_CONFIG_HOME/.config/xmonad/lock.sh")
+    , ("M-C-l", spawn "bash $XDG_CONFIG_HOME/.config/xmonad/lock.sh")
 
     -- Launch telegram
     , ("M-C-t", spawn "telegram-desktop --")

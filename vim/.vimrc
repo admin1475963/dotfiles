@@ -1,12 +1,6 @@
-call plug#begin()
-Plug 'dracula/vim', {'as': 'dracula'}
-Plug 'udalov/kotlin-vim'
-call plug#end()
-
 " Colorscheme
 set t_Co=256
 syntax enable
-colorscheme dracula
 set bg=dark
 
 filetype plugin indent on

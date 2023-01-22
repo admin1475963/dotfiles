@@ -1,8 +1,0 @@
-[Unit]
-Description=KMonad
-
-[Service]
-ExecStart=%h/.guix-profile/bin/kmonad %h/.config/kmonad/main.kbd
-
-[Install]
-WantedBy=default.target

@@ -12,15 +12,13 @@
   (require 'package)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
   (package-initialize)
-  (package-refresh-contents)
 #+END_SRC
 
 
 ** Installing use-package
 
 #+BEGIN_SRC emacs-lisp
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
+  (require 'use-package)
 #+END_SRC
 
 
@@ -31,7 +29,6 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package dracula-theme
-    :ensure t
     :config
     (load-theme 'dracula t))
 #+END_SRC
@@ -67,15 +64,6 @@
 #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 4)
-#+END_SRC
-
-*** indent-guide
-
-#+BEGIN_SRC emacs-lisp
-  (use-package indent-guide
-    :ensure t
-    :config
-    (indent-guide-global-mode))
 #+END_SRC
 
 
@@ -139,7 +127,6 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil
-    :ensure t
     :init
     (setq evil-want-integration t)
     (setq evil-want-keybinding nil)
@@ -149,7 +136,6 @@
     (evil-mode))
   (use-package evil-collection
     :after evil
-    :ensure t
     :config
     (evil-collection-init))
 #+END_SRC
@@ -158,16 +144,14 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package key-chord
-    :ensure t
     :config
-    (key-chord-mode))
+    (key-chord-mode 1))
 #+END_SRC
 
 ** general
 
 #+BEGIN_SRC emacs-lisp
   (use-package general
-    :ensure t
     :config
     (general-evil-setup))
 #+END_SRC
@@ -221,7 +205,6 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
-    :ensure t
     :config
     (which-key-mode))
 #+END_SRC
@@ -233,7 +216,6 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
-    :ensure t
     :config
     (ivy-mode))
 #+END_SRC
@@ -244,7 +226,6 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package auto-complete
-    :ensure t
     :config
     (ac-config-default)
   )
@@ -282,7 +263,6 @@
 ** org-roam
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam
-    :ensure t
     :config
     (setq-default org-roam-directory (file-truename "~/Org"))
     (org-roam-db-autosync-mode)
@@ -298,29 +278,20 @@
 
 ** org-roam-ui
 #+BEGIN_SRC emacs-lisp
-  (use-package org-roam-ui :ensure t)
-#+END_SRC
-
-
-* Tree-sitter
-
-#+BEGIN_SRC emacs-lisp
-  (use-package tree-sitter :ensure t)
-  (use-package tree-sitter-langs :ensure t)
-  (global-tree-sitter-mode)
+  (use-package org-roam-ui)
 #+END_SRC
 
 
 * Elglot
 
 #+BEGIN_SRC emacs-lisp
-  (use-package eglot :ensure t)
+  (use-package eglot)
 #+END_SRC
 
 * Tex
 
 #+BEGIN_SRC emacs-lisp
-  (use-package tex :ensure auctex)
+  (use-package tex)
 
   (setq-default TeX-auto-save t)
   (setq-default TeX-parse-self t)
@@ -340,5 +311,5 @@
 * Haskell
 
 #+BEGIN_SRC emacs-lisp
-  (use-package haskell-mode :ensure t)
+  (use-package haskell-mode)
 #+END_SRC

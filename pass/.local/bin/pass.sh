@@ -1,5 +1,3 @@
-#!/usr/bin/bash
-
 password_store="$HOME/.password-store"
 
 type=$1
