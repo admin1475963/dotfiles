@@ -1,3 +1,2 @@
 setxkbmap -model pc104 -layout us,ru -option grp:win_space_toggle
-dunst &> /tmp/dunst.log &
-exec xmonad
+exec i3

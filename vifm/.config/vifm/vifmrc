@@ -226,8 +226,8 @@ fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 
 " Images
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
-        \ {Open with vimiv}
-        \ vimiv %f &> /dev/null &
+        \ {Open with imv}
+        \ imv %f &> /dev/null &
 fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
          \ identify %f
 

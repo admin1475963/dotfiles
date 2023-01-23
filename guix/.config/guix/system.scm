@@ -42,87 +42,71 @@
 
 (operating-system
  (kernel linux)
- (kernel-arguments (list "nouveau.modeset=0"))
+
+ (kernel-arguments
+  (append
+   (list
+    "nouveau.modeset=0"
+    "modprobe.blacklist=pcspkr")
+   %default-kernel-arguments))
+
  (initrd microcode-initrd)
+
  (firmware (list linux-firmware))
 
  (host-name "ADMIN1475963")
+
  (timezone "Asia/Tashkent")
+
  (locale "en_US.utf8")
 
  (keyboard-layout (keyboard-layout "us"))
 
- (users (cons* (user-account
-        (name "admin1475963")
-        (comment "Mukhammad Ilkhomov")
-        (group "users")
-        (home-directory "/home/admin1475963")
-        (supplementary-groups '("wheel" "netdev" "video" "audio")))
-           %base-user-accounts))
+ (users
+  (cons*
+   (user-account
+    (name "admin1475963")
+    (comment "Mukhammad Ilkhomov")
+    (group "users")
+    (home-directory "/home/admin1475963")
+    (supplementary-groups '("wheel" "netdev" "video" "audio")))
+   %base-user-accounts))
 
  (packages
   (append
-   (list (specification->package "emacs")
-         (specification->package "vim")
-         (specification->package "nss-certs")
-         nix)
+   (list
+    nss-certs
+    emacs
+    vim
+    sway
+    swayidle
+    swaylock
+    i3-gaps
+    i3lock-color
+    i3status
+    nix
+    qtbase
+    qtwayland)
    %base-packages))
 
- (services (append
-            (list
-             ;; Add udev rules for MTP devices so that non-root users can access
-             ;; them.
-             (simple-service 'mtp udev-service-type (list libmtp))
-             ;; Add polkit rules, so that non-root users in the wheel group can
-             ;; perform administrative tasks (similar to "sudo").
-             polkit-wheel-service
-
-             ;; Allow desktop users to also mount NTFS and NFS file systems
-             ;; without root.
-             (simple-service 'mount-setuid-helpers setuid-program-service-type
-                             (map (lambda (program)
-                                    (setuid-program
-                                     (program program)))
-                                  (list (file-append nfs-utils "/sbin/mount.nfs")
-                                        (file-append ntfs-3g "/sbin/mount.ntfs-3g"))))
-
-             ;; The global fontconfig cache directory can sometimes contain
-             ;; stale entries, possibly referencing fonts that have been GC'd,
-             ;; so mount it read-only.
-             fontconfig-file-system-service
-
-             ;; NetworkManager and its applet.
-             (service network-manager-service-type)
-             (service wpa-supplicant-service-type)    ;needed by NetworkManager
-             (service modem-manager-service-type)
-             (service usb-modeswitch-service-type)
-
-             ;; The D-Bus clique.
-             (service avahi-service-type)
-             (udisks-service)
-             (service upower-service-type)
-             (accountsservice-service)
-             (service cups-pk-helper-service-type)
-             (service colord-service-type)
-             (geoclue-service)
-             (service polkit-service-type)
-             (elogind-service)
-             (dbus-service)
-
-             (service ntp-service-type)
-
-             (service pulseaudio-service-type)
-             (service alsa-service-type)
-             (service nix-service-type))
-
-            (modify-services
-             %base-services
-             (guix-service-type config => (guix-configuration
-                                           (inherit config)
-                                           (substitute-urls
-                                            (append (list "https://substitutes.nonguix.org") %default-substitute-urls))
-                                           (authorized-keys
-                                            (append (list (local-file "./signing-key.pub")) %default-authorized-guix-keys)))))))
+ (services
+  (append
+   (list (service nix-service-type))
+   (modify-services
+    %desktop-services
+    (guix-service-type
+     config => (guix-configuration
+                (inherit config)
+                (substitute-urls
+                 (append (list "https://substitutes.nonguix.org") %default-substitute-urls))
+                (authorized-keys
+                 (append (list (plain-file
+                                "non-guix.pub"
+                                "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
+                         %default-authorized-guix-keys))))
+    (delete gdm-service-type)
+    (screen-locker-service swaylock "swaylock")
+    (screen-locker-service i3lock-color "i3lock"))))
 
  (bootloader
   (bootloader-configuration
@@ -149,26 +133,27 @@
     (targets (list "home"))
     (type luks-device-mapping))))
 
- (file-systems (append
-                (list (file-system
-                       (device (file-system-label "ROOT"))
-                       (mount-point "/")
-                       (type "ext4")
-                       (dependencies mapped-devices))
-                      (file-system
-                       (device (file-system-label "BOOT"))
-                       (mount-point "/boot")
-                       (type "ext4"))
-                      (file-system
-                       (device (file-system-label "EFI"))
-                       (mount-point "/boot/efi")
-                       (type "vfat"))
-                      (file-system
-                       (device (file-system-label "HOME"))
-                       (mount-point "/home")
-                       (type "ext4")
-                       (dependencies mapped-devices)))
-                %base-file-systems))
+ (file-systems
+  (append
+   (list (file-system
+          (device (file-system-label "ROOT"))
+          (mount-point "/")
+          (type "ext4")
+          (dependencies mapped-devices))
+         (file-system
+          (device (file-system-label "BOOT"))
+          (mount-point "/boot")
+          (type "ext4"))
+         (file-system
+          (device (file-system-label "EFI"))
+          (mount-point "/boot/efi")
+          (type "vfat"))
+         (file-system
+          (device (file-system-label "HOME"))
+          (mount-point "/home")
+          (type "ext4")
+          (dependencies mapped-devices)))
+   %base-file-systems))
 
  (swap-devices
   (list (swap-space

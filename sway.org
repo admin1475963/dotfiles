@@ -1,4 +1,4 @@
-#+TITLE: Sway config
+#+TITLE: Desktop config
 #+PROPERTY: header-args :tangle /home/admin1475963/.config/sway/config
 
 * Main variables
@@ -19,7 +19,6 @@ Vim navigation keys:
 * Start other apps
 
 #+BEGIN_SRC conf-space
-  exec systemctl --user import-environment WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
   exec dunst &> /tmp/dunst.log
 #+END_SRC
 
@@ -216,6 +215,7 @@ Vim navigation keys:
   assign [app_id="org.kde.okular"] workspace number 3
   assign [app_id="qutebrowser.qutebrowser"] workspace number 4
   assign [class="qutebrowser"] workspace number 4
+  assign [class="Chromium-browser"] workspace number 4
   assign [app_id="libreoffice-*"] workspace number 5
   assign [app_id="org.inkscape.Inkscape"] workspace number 5
   assign [app_id="xournalpp"] workspace number 5
@@ -223,6 +223,7 @@ Vim navigation keys:
   assign [app_id="telegramdesktop"] workspace number 6
   assign [class="icedove-default"] workspace number 6
   assign [app_id="zoom"] workspace number 7
+  assign [class="zoom"] workspace number 7
 #+END_SRC
 
 * Volume and brightness
@@ -244,7 +245,7 @@ Vim navigation keys:
       gaps 10
       height 20
       position top
-      status_command while bash $XDG_CONFIG_HOME/sway/swaybar.sh; do sleep 1; done
+      status_command while bash bar.sh; do sleep 1; done
       colors {
           statusline #ffffff
           background #323232
@@ -259,9 +260,9 @@ Vim navigation keys:
   xwayland enable
 #+end_src
 
-* Swaybar
+* Bar script
 
-#+BEGIN_SRC sh header-args :tangle /home/admin1475963/.config/sway/swaybar.sh
+#+BEGIN_SRC sh header-args :tangle /home/admin1475963/.local/bin/bar.sh
   keyboard_input_name="1:1:AT_Translated_Set_2_keyboard"
   datetime=$(date "+%F %T")
 
@@ -298,4 +299,40 @@ Vim navigation keys:
   scaling=fit
   show-keyboard-layout
   indicator-radius=70
+#+END_SRC
+
+* i3lock
+
+#+BEGIN_SRC sh header-args :tangle /home/admin1475963/.config/i3/i3lock-launcher.sh
+  B='#00000000'  # blank
+  C='#ffffff00'  # clear ish
+  D='#00bbffff'  # default
+  T='#00bbffff'  # text
+  W='#ff0000ff'  # wrong
+  V='#0000ffbb'  # verifying
+  IMAGE="$WALLPAPERS/current"
+
+  i3lock \
+  --image=$IMAGE --scale \
+  --insidever-color=$C   \
+  --ringver-color=$V     \
+  --insidewrong-color=$C \
+  --ringwrong-color=$W   \
+  --inside-color=$B      \
+  --ring-color=$D        \
+  --line-color=$B        \
+  --separator-color=$D   \
+  --verif-color=$T        \
+  --wrong-color=$T        \
+  --time-color=$T        \
+  --date-color=$T        \
+  --layout-color=$T      \
+  --keyhl-color=$W       \
+  --bshl-color=$W        \
+  --screen 1            \
+  --clock               \
+  --indicator           \
+  --time-str="%H:%M:%S"  \
+  --date-str="%d %m %Y" \
+  --keylayout 1
 #+END_SRC
