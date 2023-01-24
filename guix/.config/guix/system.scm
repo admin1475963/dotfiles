@@ -1,44 +1,14 @@
 (use-modules (gnu)
              (nongnu packages linux)
              (nongnu system linux-initrd)
-             (gnu services)
-             (gnu services shepherd)
-             (gnu services base)
-             (gnu services dbus)
-             (gnu services avahi)
-             (gnu services networking)
-             (gnu services sound)
              (gnu services nix)
              (gnu services desktop)
-             (gnu system file-systems)
-             (gnu system)
-             (gnu system setuid)
-             (gnu system shadow)
-             (gnu system uuid)
-             (gnu system pam)
-             (gnu packages glib)
-             (gnu packages admin)
-             (gnu packages cups)
-             (gnu packages freedesktop)
-             (gnu packages avahi)
-             (gnu packages xdisorg)
-             (gnu packages scanner)
-             (gnu packages suckless)
-             (gnu packages linux)
-             (gnu packages libusb)
-             (gnu packages nfs)
-             (gnu packages enlightenment)
+             (gnu services xorg)
              (gnu packages package-management)
-             (guix records)
-             (guix packages)
-             (guix store)
-             (guix ui)
-             (guix utils)
-             (guix gexp)
-             (srfi srfi-1)
-             (ice-9 format)
-             (ice-9 match))
-
+             (gnu packages certs)
+             (gnu packages emacs)
+             (gnu packages wm)
+             (gnu packages vim))
 
 (operating-system
  (kernel linux)
@@ -69,8 +39,13 @@
     (comment "Mukhammad Ilkhomov")
     (group "users")
     (home-directory "/home/admin1475963")
-    (supplementary-groups '("wheel" "netdev" "video" "audio")))
+    (supplementary-groups '("wheel" "netdev" "video" "audio" "uinput" "input")))
    %base-user-accounts))
+
+ (groups
+  (cons*
+   (user-group (name "uinput"))
+   %base-groups))
 
  (packages
   (append
@@ -79,19 +54,18 @@
     emacs
     vim
     sway
-    swayidle
     swaylock
-    i3-gaps
+    swayidle
     i3lock-color
-    i3status
-    nix
-    qtbase
-    qtwayland)
+    i3-gaps)
    %base-packages))
 
  (services
   (append
-   (list (service nix-service-type))
+   (list
+    (service nix-service-type)
+    (screen-locker-service swaylock "swaylock")
+    (screen-locker-service i3lock-color "i3lock"))
    (modify-services
     %desktop-services
     (guix-service-type
@@ -105,8 +79,8 @@
                                 "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
                          %default-authorized-guix-keys))))
     (delete gdm-service-type)
-    (screen-locker-service swaylock "swaylock")
-    (screen-locker-service i3lock-color "i3lock"))))
+    (delete screen-locker-service-type)
+    (delete gdm-file-system-service))))
 
  (bootloader
   (bootloader-configuration
@@ -153,9 +127,4 @@
           (mount-point "/home")
           (type "ext4")
           (dependencies mapped-devices)))
-   %base-file-systems))
-
- (swap-devices
-  (list (swap-space
-         (target "/swapfile")
-         (dependencies file-systems)))))
+   %base-file-systems)))

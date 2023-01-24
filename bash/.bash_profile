@@ -2,6 +2,8 @@ source "$HOME/.config/bash/config.sh"
 
 if [ -z $DISPLAY ]
 then
+   emacs --daemon &
+   kmonad $XDG_CONFIG_HOME/kmonad/main.kbd &> /tmp/kmonad.log &
    if [ "$(tty)" = "/dev/tty1" ]
    then
        export XDG_SESSION_DESKTOP="sway"
