@@ -5,15 +5,7 @@
 )
 
 (defalias
-  spe (layer-toggle additional)
-  ch  (tap-macro C-a (pause 20) h)
-  cj  (tap-macro C-a (pause 20) j)
-  ck  (tap-macro C-a (pause 20) k)
-  cl  (tap-macro C-a (pause 20) l)
-  cu  (tap-macro C-a (pause 20) u)
-  ci  (tap-macro C-a (pause 20) i)
-  cw  (tap-macro C-a (pause 20) w)
-  ca  M-spc
+  spe M-spc
 )
 
 (defsrc
@@ -30,12 +22,4 @@
   @spe a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lmet lalt           spc            ralt rctrl
-)
-
-(deflayer additional
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    @cw  _    _    _    _    @cu  @ci  _    _    _    _    _
-  _    @ca  _    _    _    _    @ch  @cj  @ck  @cl  _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _              _              _    _
 )

@@ -11,27 +11,16 @@
              (gnu packages wm)
              (gnu packages vim))
 
-(define md-root
+(define md
   (list
-   (mapped-device
-    (source "/dev/vgssd")
-    (targets (list "vgssd-root"))
-    (type lvm-device-mapping))
    (mapped-device
     (source (uuid "8688f681-6288-4f5e-b31e-f7b6f8a9051f"))
+    (targets (list "hdd-luks"))
+    (type luks-device-mapping))
+   (mapped-device
+    (source "/dev/mapper/root")
     (targets (list "root"))
-    (type luks-device-mapping))))
-
-(define md-home
-  (list
-   (mapped-device
-    (source "/dev/vghdd")
-    (targets (list "vghdd-home"))
-    (type lvm-device-mapping))
-   (mapped-device
-    (source (uuid "645bef0f-077d-42d7-9626-cb41d7ee9767"))
-    (targets (list "home"))
-    (type luks-device-mapping))))
+    (type lvm-device-mapping))))
 
 (define %udev-uinput-service
   (udev-rules-service
@@ -119,7 +108,7 @@
    (targets (list "/boot/efi"))
    (keyboard-layout keyboard-layout)))
 
- (mapped-devices (append md-root))
+ (mapped-devices md)
 
  (file-systems
   (append
@@ -127,7 +116,7 @@
           (device (file-system-label "ROOT"))
           (mount-point "/")
           (type "ext4")
-          (dependencies md-root))
+          (dependencies md))
          (file-system
           (device (file-system-label "BOOT"))
           (mount-point "/boot")
@@ -135,5 +124,10 @@
          (file-system
           (device (file-system-label "EFI"))
           (mount-point "/boot/efi")
-          (type "vfat")))
+          (type "vfat"))
+         (file-system
+          (device (file-system-label "HOME"))
+          (mount-point "/home")
+          (type "ext4")
+          (dependencies md)))
    %base-file-systems)))

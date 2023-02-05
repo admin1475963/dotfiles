@@ -1,1 +1,1 @@
-qutebrowser --temp-basedir --qt-flag disable-seccomp-filter-sandbox
+qutebrowser --qt-flag disable-seccomp-filter-sandbox

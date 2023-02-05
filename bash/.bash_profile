@@ -1,11 +1,10 @@
-source "$HOME/.config/bash/config.sh"
+source "$HOME/.profile"
 
 if [ -z $DISPLAY ]
 then
-   emacs --daemon &
-   kmonad $XDG_CONFIG_HOME/kmonad/main.kbd &> /tmp/kmonad.log &
    if [ "$(tty)" = "/dev/tty1" ]
    then
+       export XDG_SESSION_TYPE="wayland"
        export XDG_SESSION_DESKTOP="sway"
        export XDG_CURRENT_DESKTOP="sway"
        #export QT_QPA_PLATFORM="wayland"

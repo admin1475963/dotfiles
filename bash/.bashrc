@@ -1,4 +1,4 @@
-source "$HOME/.config/bash/config.sh"
+source "$HOME/.profile"
 
 if [[ $(dirname $(tty)) == "/dev/pts" \
           && $(ps --no-header --pid=$PPID --format=comm) != "fish" \

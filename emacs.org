@@ -6,16 +6,16 @@
 * Package manage
 
 
-** Setup package.el
+* Setup package.el
 
 #+BEGIN_SRC emacs-lisp
   (require 'package)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-  (package-initialize)
+  (package-refresh-contents)
 #+END_SRC
 
 
-** Installing use-package
+** Activating use-package
 
 #+BEGIN_SRC emacs-lisp
   (require 'use-package)
@@ -28,18 +28,32 @@
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
-  (use-package dracula-theme
+  (use-package doom-themes
     :config
-    (load-theme 'dracula t))
+    (load-theme 'doom-one t)
+    (doom-themes-org-config))
+#+END_SRC
+
+
+** Modeline
+
+#+BEGIN_SRC emacs-lisp
+  (use-package doom-modeline
+    :init (doom-modeline-mode 1))
 #+END_SRC
 
 
 ** Fonts
 
 #+BEGIN_SRC emacs-lisp
-  (set-face-attribute 'default nil
-    :font "Hack 10"
-    :weight 'medium)
+  (add-to-list 'default-frame-alist '(font . "Hack 10"))
+#+END_SRC
+
+
+** Transparency
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'default-frame-alist '(background-alpha . 75))
 #+END_SRC
 
 
@@ -90,6 +104,7 @@
   (setq-default auto-save-default nil)
 #+END_SRC
 
+
 ** Tab bar
 
 #+BEGIN_SRC emacs-lisp
@@ -121,6 +136,13 @@
 #+END_SRC
 
 
+* Input method
+
+#+BEGIN_SRC emacs-lisp
+  (set-input-method "russian-computer")
+#+END_SRC
+
+
 * Basic key-bindings
 
 ** evil
@@ -140,6 +162,7 @@
     (evil-collection-init))
 #+END_SRC
 
+
 ** key-chord
 
 #+BEGIN_SRC emacs-lisp
@@ -147,6 +170,7 @@
     :config
     (key-chord-mode 1))
 #+END_SRC
+
 
 ** general
 
@@ -160,42 +184,68 @@
 ** Key-bindings
 
 #+BEGIN_SRC emacs-lisp
-  (evil-set-leader '(normal motion) (kbd "<SPC>"))
+    (general-imap "j"
+      (general-key-dispatch 'self-insert-command
+        :timeout 0.25
+        "k" 'evil-normal-state))
 
-  (general-imap "j"
-    (general-key-dispatch 'self-insert-command
-      :timeout 0.25
-      "k" 'evil-normal-state))
+    (general-define-key
+     :states '(normal visual)
+     :keymaps 'global
+     :prefix "SPC"
+     "SPC" 'execute-extended-command
+     "c r" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
+     "t n" 'tab-new
+     "t c" 'tab-close
+     "t h" 'tab-previous
+     "t l" 'tab-next
+     "w h" 'windmove-left
+     "w l" 'windmove-right
+     "w j" 'windmove-down
+     "w k" 'windmove-up
+     "s v" 'split-window-vertically
+     "s h" 'split-window-horizontally
+     "b b" 'ivy-switch-buffer
+     "b l" 'list-buffers
+     "b k" 'kill-buffer
+     "r p" 'point-to-register
+     "r j" 'jump-to-register
+     "r c" 'copy-to-register
+     "r i" 'insert-register
+     "r m s" 'bookmark-set
+     "r m j" 'bookmark-jump
+     "r m l" 'list-bookmarks
+     "m i" 'imenu
+     "e" 'find-file
+     "n" 'evil-normal-state)
 
-  (general-define-key
-   :states '(normal visual)
-   :keymaps 'global
-   :prefix "<leader>"
-   "SPC" 'execute-extended-command
-   "c r" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
-   "t n" 'tab-new
-   "t c" 'tab-close
-   "t h" 'tab-previous
-   "t l" 'tab-next
-   "w h" 'windmove-left
-   "w l" 'windmove-right
-   "w j" 'windmove-down
-   "w k" 'windmove-up
-   "s v" 'split-window-vertically
-   "s h" 'split-window-horizontally
-   "b b" 'ivy-switch-buffer
-   "b l" 'list-buffers
-   "b k" 'kill-buffer
-   "r p" 'point-to-register
-   "r j" 'jump-to-register
-   "r c" 'copy-to-register
-   "r i" 'insert-register
-   "r m s" 'bookmark-set
-   "r m j" 'bookmark-jump
-   "r m l" 'list-bookmarks
-   "e" 'find-file
-   "i" 'imenu
-  )
+    (general-define-key
+     :keymaps 'global
+     :prefix "C-c"
+     "c r" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
+     "t n" 'tab-new
+     "t c" 'tab-close
+     "t h" 'tab-previous
+     "t l" 'tab-next
+     "w h" 'windmove-left
+     "w l" 'windmove-right
+     "w j" 'windmove-down
+     "w k" 'windmove-up
+     "s v" 'split-window-vertically
+     "s h" 'split-window-horizontally
+     "b b" 'ivy-switch-buffer
+     "b l" 'list-buffers
+     "b k" 'kill-buffer
+     "r p" 'point-to-register
+     "r j" 'jump-to-register
+     "r c" 'copy-to-register
+     "r i" 'insert-register
+     "r m s" 'bookmark-set
+     "r m j" 'bookmark-jump
+     "r m l" 'list-bookmarks
+     "m i" 'imenu
+     "e" 'find-file
+     "n" 'evil-normal-state)
 #+END_SRC
 
 
@@ -220,6 +270,7 @@
     (ivy-mode))
 #+END_SRC
 
+
 * Autocomplete
 
 ** auto-compete
@@ -227,8 +278,7 @@
 #+BEGIN_SRC emacs-lisp
   (use-package auto-complete
     :config
-    (ac-config-default)
-  )
+    (ac-config-default))
 #+END_SRC
 
 
@@ -241,10 +291,9 @@
    "TAB" 'org-cycle)
 
   (general-define-key
-   :prefix "<leader>"
+   :prefix "C-c"
    :keymaps 'org-mode-map
-   "o t" 'org-todo
-   )
+   "o t" 'org-todo)
 
   (add-hook 'org-mode-hook
             (lambda () (setq display-fill-column-indicator nil)))
@@ -255,28 +304,33 @@
 
 
 ** org-agenda
+
 #+BEGIN_SRC emacs-lisp
   (setq-default org-agenda-files '("~/Org"))
 #+END_SRC
 
 
 ** org-roam
+
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam
     :config
     (setq-default org-roam-directory (file-truename "~/Org"))
-    (org-roam-db-autosync-mode)
-  )
+    (org-roam-db-autosync-mode))
 
   (general-define-key
-   :prefix "<leader>"
+   :prefix "C-c"
    :keymaps 'org-mode-map
-   "o r n" 'org-roam-node-insert
-   "o r t" 'org-roam-buffer-toggle)
+   "o n f" 'org-roam-node-find
+   "o n i" 'org-roam-node-insert
+   "o n l" 'org-roam-buffer-toggle
+   "o i" 'org-id-get-create
+   "o a" 'org-roam-alias-add)
 #+END_SRC
 
 
 ** org-roam-ui
+
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam-ui)
 #+END_SRC
@@ -287,6 +341,7 @@
 #+BEGIN_SRC emacs-lisp
   (use-package eglot)
 #+END_SRC
+
 
 * Tex
 
