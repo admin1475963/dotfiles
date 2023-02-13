@@ -14,24 +14,25 @@
 (define md-root
   (list
    (mapped-device
-    (source "/dev/vgssd")
-    (targets (list "vgssd-root"))
-    (type lvm-device-mapping))
+    (source (uuid "e6fa797e-1dd5-4673-a60c-5fcf0ad2ea04"))
+    (targets (list "luks-ssd"))
+    (type luks-device-mapping))
    (mapped-device
-    (source (uuid "8688f681-6288-4f5e-b31e-f7b6f8a9051f"))
-    (targets (list "root"))
-    (type luks-device-mapping))))
+    (source "/dev/vg-ssd")
+    (targets (list "vg--ssd-root"))
+    (type lvm-device-mapping))))
 
 (define md-home
   (list
    (mapped-device
-    (source "/dev/vghdd")
-    (targets (list "vghdd-home"))
-    (type lvm-device-mapping))
+    (source (uuid "156bd6a3-2103-4772-8d72-c4954debe004"))
+    (targets (list "luks-hdd"))
+    (type luks-device-mapping))
    (mapped-device
-    (source (uuid "645bef0f-077d-42d7-9626-cb41d7ee9767"))
-    (targets (list "home"))
-    (type luks-device-mapping))))
+    (source "/dev/vg-hdd")
+    (targets (list "vg--hdd-home"))
+    (type lvm-device-mapping))
+   ))
 
 (define %udev-uinput-service
   (udev-rules-service
@@ -119,7 +120,7 @@
    (targets (list "/boot/efi"))
    (keyboard-layout keyboard-layout)))
 
- (mapped-devices (append md-root))
+ (mapped-devices (append md-root md-home))
 
  (file-systems
   (append
@@ -135,5 +136,10 @@
          (file-system
           (device (file-system-label "EFI"))
           (mount-point "/boot/efi")
-          (type "vfat")))
+          (type "vfat"))
+     (file-system
+      (device (file-system-label "HOME"))
+      (mount-point "/home")
+      (type "ext4")
+      (dependencies md-home)))
    %base-file-systems)))

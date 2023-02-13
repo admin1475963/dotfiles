@@ -53,7 +53,7 @@
 ** Transparency
 
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'default-frame-alist '(background-alpha . 75))
+  (add-to-list 'default-frame-alist '(alpha-background . 75))
 #+END_SRC
 
 
@@ -193,8 +193,7 @@
      :states '(normal visual)
      :keymaps 'global
      :prefix "SPC"
-     "SPC" 'execute-extended-command
-     "c r" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
+     "c" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
      "t n" 'tab-new
      "t c" 'tab-close
      "t h" 'tab-previous
@@ -203,8 +202,8 @@
      "w l" 'windmove-right
      "w j" 'windmove-down
      "w k" 'windmove-up
-     "s v" 'split-window-vertically
-     "s h" 'split-window-horizontally
+     "w s v" 'split-window-vertically
+     "w s h" 'split-window-horizontally
      "b b" 'ivy-switch-buffer
      "b l" 'list-buffers
      "b k" 'kill-buffer
@@ -215,14 +214,14 @@
      "r m s" 'bookmark-set
      "r m j" 'bookmark-jump
      "r m l" 'list-bookmarks
-     "m i" 'imenu
+     "m" 'imenu
      "e" 'find-file
-     "n" 'evil-normal-state)
+     "s" 'evil-normal-state)
 
     (general-define-key
      :keymaps 'global
      :prefix "C-c"
-     "c r" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
+     "c" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
      "t n" 'tab-new
      "t c" 'tab-close
      "t h" 'tab-previous
@@ -231,8 +230,8 @@
      "w l" 'windmove-right
      "w j" 'windmove-down
      "w k" 'windmove-up
-     "s v" 'split-window-vertically
-     "s h" 'split-window-horizontally
+     "w s v" 'split-window-vertically
+     "w s h" 'split-window-horizontally
      "b b" 'ivy-switch-buffer
      "b l" 'list-buffers
      "b k" 'kill-buffer
@@ -243,9 +242,9 @@
      "r m s" 'bookmark-set
      "r m j" 'bookmark-jump
      "r m l" 'list-bookmarks
-     "m i" 'imenu
+     "m" 'imenu
      "e" 'find-file
-     "n" 'evil-normal-state)
+     "s" 'evil-normal-state)
 #+END_SRC
 
 
@@ -286,15 +285,6 @@
 
 ** Config
 #+BEGIN_SRC emacs-lisp
-  (general-define-key
-   :keymaps 'org-mode-map
-   "TAB" 'org-cycle)
-
-  (general-define-key
-   :prefix "C-c"
-   :keymaps 'org-mode-map
-   "o t" 'org-todo)
-
   (add-hook 'org-mode-hook
             (lambda () (setq display-fill-column-indicator nil)))
 
@@ -317,15 +307,6 @@
     :config
     (setq-default org-roam-directory (file-truename "~/Org"))
     (org-roam-db-autosync-mode))
-
-  (general-define-key
-   :prefix "C-c"
-   :keymaps 'org-mode-map
-   "o n f" 'org-roam-node-find
-   "o n i" 'org-roam-node-insert
-   "o n l" 'org-roam-buffer-toggle
-   "o i" 'org-id-get-create
-   "o a" 'org-roam-alias-add)
 #+END_SRC
 
 
@@ -335,6 +316,40 @@
   (use-package org-roam-ui)
 #+END_SRC
 
+
+** Key bindings
+
+#+BEGIN_SRC emacs-lisp
+  (general-define-key
+   :keymaps 'org-mode-map
+   "TAB" 'org-cycle)
+
+  (general-define-key
+   :prefix "C-c"
+   :keymaps 'org-mode-map
+   "o t" 'org-todo
+   "o n f" 'org-roam-node-find
+   "o n i" 'org-roam-node-insert
+   "o n l" 'org-roam-buffer-toggle
+   "o b d" 'org-roam-buffer-display-dedicated
+   "o b t" 'org-roam-buffer-toggle
+   "o i" 'org-id-get-create
+   "o a" 'org-roam-alias-add)
+#+END_SRC
+
+** Templates
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default org-roam-capture-templates
+                '(("d" "default" plain "%?"
+                   :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                      "#+title: ${title}\n")
+                   :unnarrowed t)
+                  ("e" "entry" entry
+                   :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                      "#+title: ${title}\n")
+                   :unarrowed t)))
+#+END_SRC
 
 * Elglot
 
