@@ -6,3 +6,5 @@ if [[ $(dirname $(tty)) == "/dev/pts" \
 then
 	exec fish
 fi
+
+

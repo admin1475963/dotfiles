@@ -29,6 +29,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package doom-themes
+    :ensure t
     :config
     (load-theme 'doom-one t)
     (doom-themes-org-config))
@@ -39,6 +40,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package doom-modeline
+    :ensure t
     :init (doom-modeline-mode 1))
 #+END_SRC
 
@@ -149,6 +151,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil
+    :ensure t
     :init
     (setq evil-want-integration t)
     (setq evil-want-keybinding nil)
@@ -157,6 +160,7 @@
     :config
     (evil-mode))
   (use-package evil-collection
+    :ensure t
     :after evil
     :config
     (evil-collection-init))
@@ -167,6 +171,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package key-chord
+    :ensure t
     :config
     (key-chord-mode 1))
 #+END_SRC
@@ -176,6 +181,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package general
+    :ensure t
     :config
     (general-evil-setup))
 #+END_SRC
@@ -184,67 +190,71 @@
 ** Key-bindings
 
 #+BEGIN_SRC emacs-lisp
-    (general-imap "j"
-      (general-key-dispatch 'self-insert-command
-        :timeout 0.25
-        "k" 'evil-normal-state))
+  (general-imap "j"
+    (general-key-dispatch 'self-insert-command
+      :timeout 0.25
+      "k" 'evil-normal-state))
 
-    (general-define-key
-     :states '(normal visual)
-     :keymaps 'global
-     :prefix "SPC"
-     "c" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
-     "t n" 'tab-new
-     "t c" 'tab-close
-     "t h" 'tab-previous
-     "t l" 'tab-next
-     "w h" 'windmove-left
-     "w l" 'windmove-right
-     "w j" 'windmove-down
-     "w k" 'windmove-up
-     "w s v" 'split-window-vertically
-     "w s h" 'split-window-horizontally
-     "b b" 'ivy-switch-buffer
-     "b l" 'list-buffers
-     "b k" 'kill-buffer
-     "r p" 'point-to-register
-     "r j" 'jump-to-register
-     "r c" 'copy-to-register
-     "r i" 'insert-register
-     "r m s" 'bookmark-set
-     "r m j" 'bookmark-jump
-     "r m l" 'list-bookmarks
-     "m" 'imenu
-     "e" 'find-file
-     "s" 'evil-normal-state)
+  (general-define-key
+   :keymaps 'global
+   :prefix "C-c"
+   "c" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
+   "t n" 'tab-new
+   "t c" 'tab-close
+   "t h" 'tab-previous
+   "t l" 'tab-next
+   "w h" 'windmove-left
+   "w l" 'windmove-right
+   "w j" 'windmove-down
+   "w k" 'windmove-up
+   "w v" 'split-window-vertically
+   "w s h" 'split-window-horizontally
+   "b b" 'ivy-switch-buffer
+   "b l" 'list-buffers
+   "b k" 'kill-buffer
+   "r p" 'point-to-register
+   "r j" 'jump-to-register
+   "r c" 'copy-to-register
+   "r i" 'insert-register
+   "r m s" 'bookmark-set
+   "r m j" 'bookmark-jump
+   "r m l" 'list-bookmarks
+   "m" 'imenu
+   "e" 'find-file
+   "s" 'evil-normal-state
+   "i" 'isearch-forward
+  )
 
-    (general-define-key
-     :keymaps 'global
-     :prefix "C-c"
-     "c" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
-     "t n" 'tab-new
-     "t c" 'tab-close
-     "t h" 'tab-previous
-     "t l" 'tab-next
-     "w h" 'windmove-left
-     "w l" 'windmove-right
-     "w j" 'windmove-down
-     "w k" 'windmove-up
-     "w s v" 'split-window-vertically
-     "w s h" 'split-window-horizontally
-     "b b" 'ivy-switch-buffer
-     "b l" 'list-buffers
-     "b k" 'kill-buffer
-     "r p" 'point-to-register
-     "r j" 'jump-to-register
-     "r c" 'copy-to-register
-     "r i" 'insert-register
-     "r m s" 'bookmark-set
-     "r m j" 'bookmark-jump
-     "r m l" 'list-bookmarks
-     "m" 'imenu
-     "e" 'find-file
-     "s" 'evil-normal-state)
+  (general-define-key
+   :keymaps 'global
+   :states '(normal motion visual)
+   :prefix "SPC"
+   "c" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
+   "t n" 'tab-new
+   "t c" 'tab-close
+   "t h" 'tab-previous
+   "t l" 'tab-next
+   "w h" 'windmove-left
+   "w l" 'windmove-right
+   "w j" 'windmove-down
+   "w k" 'windmove-up
+   "w v" 'split-window-vertically
+   "w s h" 'split-window-horizontally
+   "b b" 'ivy-switch-buffer
+   "b l" 'list-buffers
+   "b k" 'kill-buffer
+   "r p" 'point-to-register
+   "r j" 'jump-to-register
+   "r c" 'copy-to-register
+   "r i" 'insert-register
+   "r m s" 'bookmark-set
+   "r m j" 'bookmark-jump
+   "r m l" 'list-bookmarks
+   "m" 'imenu
+   "e" 'find-file
+   "s" 'evil-normal-state
+   "i" 'isearch-forward
+  )
 #+END_SRC
 
 
@@ -254,6 +264,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
+    :ensure t
     :config
     (which-key-mode))
 #+END_SRC
@@ -265,6 +276,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
+    :ensure t
     :config
     (ivy-mode))
 #+END_SRC
@@ -276,6 +288,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package auto-complete
+    :ensure t
     :config
     (ac-config-default))
 #+END_SRC
@@ -304,6 +317,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam
+    :ensure t
     :config
     (setq-default org-roam-directory (file-truename "~/Org"))
     (org-roam-db-autosync-mode))
@@ -313,7 +327,8 @@
 ** org-roam-ui
 
 #+BEGIN_SRC emacs-lisp
-  (use-package org-roam-ui)
+  (use-package org-roam-ui
+    :ensure t)
 #+END_SRC
 
 
@@ -354,25 +369,27 @@
 * Elglot
 
 #+BEGIN_SRC emacs-lisp
-  (use-package eglot)
+  (use-package eglot
+    :ensure t)
 #+END_SRC
 
 
 * Tex
 
 #+BEGIN_SRC emacs-lisp
-  (use-package tex)
+  (use-package tex
+    :ensure auctex)
 
   (setq-default TeX-auto-save t)
   (setq-default TeX-parse-self t)
   (setq-default TeX-engine 'xetex)
   (setq-default TeX-view-program-selection
-      '((output-pdf "Okular"))
-  )
+                '((output-pdf "Okular"))
+                )
   (setq-default font-latex-fontify-script nil)
   (add-hook 'LaTeX-mode-hook (lambda ()
-      (setq display-fill-column-indicator nil)
-  ))
+                               (setq display-fill-column-indicator nil)
+                               ))
 
   (custom-set-faces '(preview-reference-face ((t (:background "white")))))
 #+END_SRC
@@ -381,5 +398,6 @@
 * Haskell
 
 #+BEGIN_SRC emacs-lisp
-  (use-package haskell-mode)
+  (use-package haskell-mode
+    :ensure t)
 #+END_SRC
