@@ -1,7 +1,7 @@
 [user]
 	email = ilkhomovmukhammad8128@gmail.com
 	name = Mukhammad Ilkhomov
-	signingKey = 499F21C392AC4B04
+	signingKey = 6664108AF618B289
 [pull]
 	rebase = no
 [gpg]
@@ -12,3 +12,4 @@
 	defaultBranch = main
 [safe]
 	directory = /opt/flutter
+r

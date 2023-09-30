@@ -142,6 +142,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (set-input-method "russian-computer")
+  (toggle-input-method)
 #+END_SRC
 
 
@@ -226,8 +227,7 @@
   )
 
   (general-define-key
-   :keymaps 'global
-   :states '(normal motion visual)
+   :keymaps '(normal visual)
    :prefix "SPC"
    "c" (lambda () (interactive) (load-file "~/.config/emacs/init.el"))
    "t n" 'tab-new
@@ -293,6 +293,14 @@
     (ac-config-default))
 #+END_SRC
 
+* UUID
+
+** uuid
+
+#+BEGIN_SRC emacs-lisp
+  (use-package uuid
+    :ensure t)
+#+END_SRC
 
 * Org mode
 
@@ -301,6 +309,7 @@
   (add-hook 'org-mode-hook
             (lambda () (setq display-fill-column-indicator nil)))
 
+  (setq-default org-default-notes-file "~/Notes/UnsortedNotes.org")
   (setq-default org-src-preserve-indentation nil)
   (setq-default org-catch-invisible-edits 'error)
 #+END_SRC
@@ -309,7 +318,7 @@
 ** org-agenda
 
 #+BEGIN_SRC emacs-lisp
-  (setq-default org-agenda-files '("~/Org"))
+  (setq-default org-agenda-files '("~/Notes"))
 #+END_SRC
 
 
@@ -319,7 +328,7 @@
   (use-package org-roam
     :ensure t
     :config
-    (setq-default org-roam-directory (file-truename "~/Org"))
+    (setq-default org-roam-directory (file-truename "~/Notes"))
     (org-roam-db-autosync-mode))
 #+END_SRC
 
@@ -343,27 +352,22 @@
    :prefix "C-c"
    :keymaps 'org-mode-map
    "o t" 'org-todo
-   "o n f" 'org-roam-node-find
-   "o n i" 'org-roam-node-insert
-   "o n l" 'org-roam-buffer-toggle
-   "o b d" 'org-roam-buffer-display-dedicated
-   "o b t" 'org-roam-buffer-toggle
    "o i" 'org-id-get-create
-   "o a" 'org-roam-alias-add)
+   "o r f" 'org-roam-node-find
+   "o r i" 'org-roam-node-insert
+   "o r c" 'org-roam-capture
+   "o r t" 'org-roam-buffer-toggle
+   "o r d" 'org-roam-buffer-display-dedicated
+   "o r a" 'org-roam-alias-add)
 #+END_SRC
 
 ** Templates
 
 #+BEGIN_SRC emacs-lisp
   (setq-default org-roam-capture-templates
-                '(("d" "default" plain "%?"
-                   :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                                      "#+title: ${title}\n")
-                   :unnarrowed t)
-                  ("e" "entry" entry
-                   :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                                      "#+title: ${title}\n")
-                   :unarrowed t)))
+                '(("e" "entry" entry "* ${title}\n:PROPERTIES:\n:ID: %(uuid-string)\n:END:\n%?"
+                   :target (node "Unsorted Notes")
+                   :empty-lines 1)))
 #+END_SRC
 
 * Elglot

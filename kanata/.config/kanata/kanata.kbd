@@ -46,7 +46,7 @@
     M-spc
     @eskl @ew   @ef   lrld @et   _     _     @ei   @eo   _      _     _      _
     C-a   @eesn _     _    _     _     _     _     _     _      _
-    _     A-x   C-c   _    @eb   _     @lmse _     _     _
+    caps  A-x   C-c   _    @eb   _     @lmse _     _     _
 )
 
 (deflayer mouse
