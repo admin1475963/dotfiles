@@ -7,10 +7,6 @@ set $right l
 
 xwayland enable
 
-exec kanata -c $XDG_CONFIG_HOME/kanata/kanata.kbd
-exec emacs --daemon
-exec dunst &> /tmp/dunst.log
-
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec ydotoold
