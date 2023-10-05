@@ -1,0 +1,160 @@
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+xwayland enable
+
+exec kanata -c $XDG_CONFIG_HOME/kanata/kanata.kbd
+exec emacs --daemon
+exec dunst &> /tmp/dunst.log
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec ydotoold
+
+input type:keyboard {
+      xkb_layout "us,ru,uz"
+      xkb_model "pc104"
+      xkb_options "grp:win_space_toggle"
+}
+
+output * bg $WALLPAPERS/current fill
+
+default_border normal 2
+gaps inner 10
+
+bindsym --to-code {
+        $mod+Shift+r reload
+        $mod+Shift+q exec swaynag \
+                          -t warning -m 'Do you really want to exit sway?' \
+                          -B 'Yes, exit sway' \
+                          'swaymsg exit'
+}
+
+bindsym --to-code {
+        $mod+Shift+c kill
+
+        $mod+$left focus left
+        $mod+$down focus down
+        $mod+$up focus up
+        $mod+$right focus right
+
+        $mod+Left focus left
+        $mod+Down focus down
+        $mod+Up focus up
+        $mod+Right focus right
+
+        $mod+Shift+t focus mode_toggle
+        $mod+p focus parent
+        $mod+c focus child
+
+        $mod+Shift+$left move left
+        $mod+Shift+$down move down
+        $mod+Shift+$up move up
+        $mod+Shift+$right move right
+
+        $mod+Shift+Left move left
+        $mod+Shift+Down move down
+        $mod+Shift+Up move up
+        $mod+Shift+Right move right
+
+        $mod+f fullscreen
+        $mod+Shift+f floating toggle
+}
+
+floating_modifier $mod normal
+
+mode "resize" {
+     bindsym --to-code {
+             $left resize shrink width 10px
+             $down resize grow height 10px
+             $up resize shrink height 10px
+             $right resize grow width 10px
+
+             Left resize shrink width 10px
+             Down resize grow height 10px
+             Up resize shrink height 10px
+             Right resize grow width 10px
+
+             Return mode "default"
+             Escape mode "default"
+     }
+}
+
+bindsym --to-code $mod+r mode "resize"
+
+workspace_layout tabbed
+bindsym {
+        $mod+1 workspace number 1
+        $mod+2 workspace number 2
+        $mod+3 workspace number 3
+        $mod+4 workspace number 4
+        $mod+5 workspace number 5
+        $mod+6 workspace number 6
+        $mod+7 workspace number 7
+        $mod+8 workspace number 8
+        $mod+9 workspace number 9
+        $mod+0 workspace number 10
+
+        $mod+Shift+1 move container to workspace number 1
+        $mod+Shift+2 move container to workspace number 2
+        $mod+Shift+3 move container to workspace number 3
+        $mod+Shift+4 move container to workspace number 4
+        $mod+Shift+5 move container to workspace number 5
+        $mod+Shift+6 move container to workspace number 6
+        $mod+Shift+7 move container to workspace number 7
+        $mod+Shift+8 move container to workspace number 8
+        $mod+Shift+9 move container to workspace number 9
+        $mod+Shift+0 move container to workspace number 10
+}
+
+bindsym --to-code {
+        $mod+Shift+y layout stacking
+        $mod+Shift+u layout tabbed
+        $mod+Shift+i layout splith
+        $mod+Shift+o layout splitv
+}
+
+bindsym --to-code {
+        $mod+Return exec alacritty
+        $mod+m      exec bemenu-run | xargs swaymsg exec --
+        $mod+Ctrl+p exec bash pass.sh
+        $mod+e      exec emacsclient -c -a 'emacs'
+        $mod+w      exec bash qutebrowser-launcher.sh
+        $mod+Ctrl+w exec chromium
+        $mod+Ctrl+t exec telegram-desktop --
+        $mod+Ctrl+m exec evolution
+        $mod+Ctrl+z exec swaylock
+        $mod+Ctrl+s exec bash -c "grim -g '$(slurp)' $HOME/Pictures/screenshots/$(date +'%F_%T.png')"
+}
+
+assign [app_id="emacs"] workspace number 2
+assign [class="(E|e)macs"] workspace number 2
+assign [app_id="org.kde.okular"] workspace number 3
+assign [class="okular"] workspace number 3
+assign [app_id="qutebrowser.qutebrowser"] workspace number 4
+assign [class="qutebrowser"] workspace number 4
+assign [app_id="chromium"] workspace number 4
+assign [class="chromium"] workspace number 4
+assign [app_id="libreoffice-*"] workspace number 5
+assign [app_id="org.inkscape.Inkscape"] workspace number 5
+assign [app_id="xournalpp"] workspace number 5
+assign [class="Gimp"] workspace number 5
+assign [app_id="org.telegram.desktop"] workspace number 6
+assign [app_id="evolution"] workspace number 6
+assign [app_id="zoom"] workspace number 7
+assign [class="zoom"] workspace number 7
+
+bindsym XF86AudioMute exec amixer sset Master toggle
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+
+bar {
+    position top
+    swaybar_command waybar
+}

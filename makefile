@@ -1,5 +1,5 @@
 all:
-	stow --verbose --target=$$HOME --restow */
+	stow --verbose --no-folding --target=$$HOME --restow */
 delete:
 	stow --verbose --target=$$HOME --delete */
 
