@@ -3,9 +3,8 @@ Description=Kanata keyboard remapper
 Documentation=https://github.com/jtroo/kanata
 
 [Service]
-Environment=HOME=/home/admin1475963
 Type=simple
-ExecStart=kanata --cfg $HOME/.config/kanata/kanata.kbd
+ExecStart=kanata
 Restart=never
 
 [Install]
