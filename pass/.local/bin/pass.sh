@@ -4,20 +4,23 @@ type=$1
 
 if [ -z $type ]
 then
-    type=$( ls ~/.password-store/personal | bemenu )
+    type=$( ls ~/.password-store/personal | dmenu )
 fi
 
-if [ $type = "otps" ]
+if [ -n $type ]
 then
-    otp="otp"
-else
-    otp=""
+    if [ $type = "otps" ]
+    then
+        otp="otp"
+    else
+        otp=""
+    fi
+
+    items=$( ls "$password_store/personal/$type" )
+
+    items=$( echo "$items" | cut -f 1 -d '.' )
+
+    target=$( echo "$items" | bemenu )
+
+    pass $otp -c "personal/$type/$target"
 fi
-
-items=$( ls "$password_store/personal/$type" )
-
-items=$( echo "$items" | cut -f 1 -d '.' )
-
-target=$( echo "$items" | bemenu )
-
-pass $otp -c "personal/$type/$target"

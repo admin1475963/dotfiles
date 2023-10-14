@@ -1,0 +1,28 @@
+[[block]]
+block = "backlight"
+
+[[block]]
+block = "battery"
+
+[[block]]
+block = "cpu"
+
+[[block]]
+block = "disk_space"
+
+[[block]]
+block = "keyboard_layout"
+format = " $layout "
+interval = 1
+
+[[block]]
+block = "memory"
+
+[[block]]
+block = "net"
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "time"

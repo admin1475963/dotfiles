@@ -9,7 +9,6 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
-#export GTK_THEME="Arc-Dark"
+export GTK_THEME="Arc-Dark"
 
 export GNUPGHOME="$HOME/.gnupg"
-export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"

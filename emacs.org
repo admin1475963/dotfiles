@@ -1,5 +1,5 @@
-#+TITLE: Emacs config
 #+AUTHOR: Mukhammad Ilkhomov
+#+TITLE: Emacs config
 #+PROPERTY: header-args :tangle /home/admin1475963/.config/emacs/init.el
 
 
@@ -49,13 +49,6 @@
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'default-frame-alist '(font . "Hack 10"))
-#+END_SRC
-
-
-** Transparency
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'default-frame-alist '(alpha-background . 75))
 #+END_SRC
 
 
@@ -370,13 +363,6 @@
                    :empty-lines 1)))
 #+END_SRC
 
-* Elglot
-
-#+BEGIN_SRC emacs-lisp
-  (use-package eglot
-    :ensure t)
-#+END_SRC
-
 
 * Tex
 
@@ -396,12 +382,4 @@
                                ))
 
   (custom-set-faces '(preview-reference-face ((t (:background "white")))))
-#+END_SRC
-
-
-* Haskell
-
-#+BEGIN_SRC emacs-lisp
-  (use-package haskell-mode
-    :ensure t)
 #+END_SRC

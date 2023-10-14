@@ -26,6 +26,7 @@
     caps
     ret
     spc
+    1     2     3
     q     w     e     r     t     y     u     i     o     p     [     ]      \
     a     s     d     f     g     h     j     k     l     ;     '
     z     x     c     v     b     n     m     ,     .     /
@@ -35,6 +36,7 @@
     @lspe
     ret
     spc
+    1     2     3
     q     w     e     r     t     y     u     i     o     p     [     ]      \
     a     s     d     f     g     h     j     k     l     ;     '
     z     x     c     v     b     n     m     ,     .     /
@@ -44,6 +46,7 @@
     _
     _
     M-spc
+    S-C-1 S-C-2 S-C-3
     @eskl @ew   @ef   lrld @et   _     _     @ei   @eo   _      _     _      _
     C-a   @eesn _     _    _     _     _     _     _     _      _
     caps  A-x   C-c   _    @eb   _     @lmse _     _     _
@@ -53,6 +56,7 @@
   @lmain
   _
   _
+  _    _     _
   _    @mwu _     _    _     _    _    _     _    _    _    _    _
   mlft @mwd mrgt  _    _     @mmlt @mmdn @mmup @mmrt    _    _
   _    _    _     _    _     _    _    _     _    _

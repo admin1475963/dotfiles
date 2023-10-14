@@ -26,8 +26,7 @@ bindsym --to-code {
         $mod+Shift+r reload
         $mod+Shift+q exec swaynag \
                           -t warning -m 'Do you really want to exit sway?' \
-                          -B 'Yes, exit sway' \
-                          'swaymsg exit'
+                          -B 'Yes, exit sway' 'swaymsg exit'
 }
 
 bindsym --to-code {
