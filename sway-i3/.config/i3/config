@@ -10,6 +10,7 @@ font pango:Noto Sans 8
 exec feh --bg-scale $WALLPAPERS/current
 exec xcompmgr
 exec dunst
+exec setxkbmap -model pc104 -layout us
 
 default_border normal 2
 gaps inner 10
