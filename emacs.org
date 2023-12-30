@@ -215,7 +215,6 @@
    "r m l" 'list-bookmarks
    "m" 'imenu
    "e" 'find-file
-   "s" 'evil-normal-state
    "i" 'isearch-forward
   )
 
@@ -245,7 +244,6 @@
    "r m l" 'list-bookmarks
    "m" 'imenu
    "e" 'find-file
-   "s" 'evil-normal-state
    "i" 'isearch-forward
   )
 #+END_SRC
@@ -301,25 +299,6 @@
 
 #+BEGIN_SRC emacs-lisp
   (setq-default org-agenda-files '("~/Notes"))
-#+END_SRC
-
-
-** org-roam
-
-#+BEGIN_SRC emacs-lisp
-  (use-package org-roam
-    :ensure t
-    :config
-    (setq-default org-roam-directory (file-truename "~/Notes"))
-    (org-roam-db-autosync-mode))
-#+END_SRC
-
-
-** org-roam-ui
-
-#+BEGIN_SRC emacs-lisp
-  (use-package org-roam-ui
-    :ensure t)
 #+END_SRC
 
 

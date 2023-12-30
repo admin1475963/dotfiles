@@ -11,11 +11,6 @@ block = "cpu"
 block = "disk_space"
 
 [[block]]
-block = "keyboard_layout"
-format = " $layout "
-interval = 1
-
-[[block]]
 block = "memory"
 
 [[block]]

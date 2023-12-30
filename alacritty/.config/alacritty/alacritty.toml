@@ -1,0 +1,27 @@
+[colors.primary]
+background = "#000000"
+foreground = "#f2f2f2"
+
+[font]
+size = 9.0
+
+[font.bold]
+family = "Hack Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "Hack Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "Hack Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "Hack Nerd Font"
+style = "Regular"
+
+[window]
+dynamic_title = false
+opacity = 0.8
+title = "Alacritty"

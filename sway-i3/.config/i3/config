@@ -10,7 +10,7 @@ font pango:Noto Sans 8
 exec feh --bg-scale $WALLPAPERS/current
 exec xcompmgr
 exec dunst
-exec setxkbmap -model pc104 -layout us
+exec fcitx5 -ud
 
 default_border normal 2
 gaps inner 10
@@ -47,9 +47,9 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+f fullscreen
 bindsym $mod+Shift+f floating toggle
 
-bindsym $mod+Ctrl+1 exec setxkbmap -model pc104 -layout us
-bindsym $mod+Ctrl+2 exec setxkbmap -model pc104 -layout ru
-bindsym $mod+Ctrl+3 exec setxkbmap -model pc104 -layout uz
+bindsym $mod+Ctrl+1 exec setxkbmap -layout us
+bindsym $mod+Ctrl+2 exec setxkbmap -layout ru
+bindsym $mod+Ctrl+3 exec setxkbmap -layout uz
 
 mode "resize" {
     bindsym $left resize shrink width 10px
@@ -100,16 +100,18 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+m      exec dmenu_run | xargs i3-msg exec --
 bindsym $mod+Ctrl+p exec bash pass.sh
 bindsym $mod+e      exec emacsclient -c -a 'emacs'
+bindsym $mod+o      exec obsidian
 bindsym $mod+w      exec qutebrowser
-bindsym $mod+Ctrl+w exec chromium
+bindsym $mod+Ctrl+w exec brave
 bindsym $mod+Ctrl+t exec telegram-desktop
 bindsym $mod+Ctrl+m exec evolution
 bindsym $mod+Ctrl+z exec bash $XDG_CONFIG_HOME/i3lock/i3lock.sh
 
 assign [class="(E|e)macs"] workspace number 2
+assign [class="obsidian"] workspace number 2
 assign [class="okular"] workspace number 3
 assign [class="qutebrowser"] workspace number 4
-assign [class="(C|c)hromium"] workspace number 4
+assign [class="(B|b)rave(-browser)?"] workspace number 4
 assign [class="libreoffice(\-.*)?"] workspace number 5
 assign [class="(org.inkscape.)?Inkscape"] workspace number 5
 assign [class="xournalpp"] workspace number 5

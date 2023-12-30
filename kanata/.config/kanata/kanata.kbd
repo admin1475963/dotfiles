@@ -3,6 +3,8 @@
 )
 
 (defalias
+    lspe (layer-while-held special)
+    smcn (tap-dance 200 (; esc))
     lmse (layer-switch mouse)
     lmain (layer-switch main)
     mwu (mwheel-up 50 60)
@@ -11,23 +13,14 @@
     mmrt (movemouse-right 50 5)
     mmup (movemouse-up 50 5)
     mmdn (movemouse-down 50 5)
-    lspe (layer-while-held special)
-    eesn (macro C-c s)
-    eskl (macro C-\)
-    ef (macro C-c e)
-    ei (macro C-c i)
-    ew (macro C-c w)
-    et (macro C-c t)
-    eb (macro C-c b)
-    eo (macro C-c o)
 )
 
 (defsrc
     caps
     ret
     spc
-    1     2     3
-    q     w     e     r     t     y     u     i     o     p     [     ]      \
+    1     2     3     4     5     6     7     8     9     0
+    q     w     e     r     t     y     u     i     o     p     [     ]     \
     a     s     d     f     g     h     j     k     l     ;     '
     z     x     c     v     b     n     m     ,     .     /
 )
@@ -36,28 +29,28 @@
     @lspe
     ret
     spc
-    1     2     3
-    q     w     e     r     t     y     u     i     o     p     [     ]      \
-    a     s     d     f     g     h     j     k     l     ;     '
+    1     2     3     4     5     6     7     8     9     0
+    q     w     e     r     t     y     u     i     o     p     [     ]     \
+    a     s     d     f     g     h     j     k     l     @smcn '
     z     x     c     v     b     n     m     ,     .     /
 )
 
 (deflayer special
     _
     _
-    M-spc
-    S-C-1 S-C-2 S-C-3
-    @eskl @ew   @ef   lrld @et   _     _     @ei   @eo   _      _     _      _
-    C-a   @eesn _     _    _     _     _     _     _     _      _
-    caps  A-x   C-c   _    @eb   _     @lmse _     _     _
+    C-c
+    _     _     _     _     _     _     _     _     _     _
+    C-\   _     _     lrld  _     _     _     _     _     _     _     _     _
+    C-a   esc   _     _     _     _     _     _     _     _     _
+    _     _     _     _     _     _     @lmse _     _     _
 )
 
 (deflayer mouse
-  @lmain
-  _
-  _
-  _    _     _
-  _    @mwu _     _    _     _    _    _     _    _    _    _    _
-  mlft @mwd mrgt  _    _     @mmlt @mmdn @mmup @mmrt    _    _
-  _    _    _     _    _     _    _    _     _    _
+    @lmain
+    _
+    _
+    _     _     _     _     _     _     _     _     _     _
+    _     @mwu  _     _     _     _     _     _     _     _     _     _     _
+    mlft  @mwd  mrgt  _     _     @mmlt @mmdn @mmup @mmrt _     _
+    _     _     _     _     _     _     _     _     _     _
 )
