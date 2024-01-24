@@ -1,5 +1,5 @@
 export PATH="$HOME/.local/bin:$PATH"
-export EDITOR="emacsclient -c -a 'emacs'"
+export EDITOR="nvim"
 
 export WALLPAPERS="$HOME/Pictures/wallpapers"
 

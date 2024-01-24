@@ -4,7 +4,6 @@
 
 (defalias
     lspe (layer-while-held special)
-    smcn (tap-dance 200 (; esc))
     lmse (layer-switch mouse)
     lmain (layer-switch main)
     mwu (mwheel-up 50 60)
@@ -31,7 +30,7 @@
     spc
     1     2     3     4     5     6     7     8     9     0
     q     w     e     r     t     y     u     i     o     p     [     ]     \
-    a     s     d     f     g     h     j     k     l     @smcn '
+    a     s     d     f     g     h     j     k     l     ;     '
     z     x     c     v     b     n     m     ,     .     /
 )
 
@@ -40,7 +39,7 @@
     _
     C-c
     _     _     _     _     _     _     _     _     _     _
-    C-\   _     _     lrld  _     _     _     _     _     _     _     _     _
+    C-S-6 M-spc _     lrld  _     _     _     _     _     _     _     _     _
     C-a   esc   _     _     _     _     _     _     _     _     _
     _     _     _     _     _     _     @lmse _     _     _
 )
