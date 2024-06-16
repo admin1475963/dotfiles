@@ -1,7 +1,7 @@
 " no compatible with old vi
 set nocompatible
 
-inoremap jk <Esc>
+inoremap jj <Esc>
 
 " row number and cursorline
 set number
@@ -30,6 +30,7 @@ set shiftwidth=4
 set clipboard=unnamedplus
 
 let mapleader=" "
+let maplocalleader = " "
 nnoremap <SPACE> <Nop>
 
 nnoremap <leader>tn :tabnew<Enter> 
@@ -47,8 +48,12 @@ nnoremap <leader>wk <C-w>k<Enter>
 nnoremap <leader>wl <C-w>l<Enter>
 nnoremap <leader>wc :q<Enter>
 
+nnoremap <leader>e :e
+
 set encoding=utf-8
 set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=-1
 
 filetype on
 filetype plugin on
@@ -56,11 +61,24 @@ filetype indent on
 
 syntax enable
 
+if !exists('g:vscode')
 call plug#begin()
 Plug 'joshdick/onedark.vim'
 Plug 'lervag/vimtex'
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
+Plug 'nvim-tree/nvim-web-devicons' " optional
+Plug 'nvim-tree/nvim-tree.lua'
 call plug#end()
 
 colorscheme onedark
 
-let maplocalleader = " "
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+
+lua << EOF
+require("nvim-tree").setup()
+EOF
+
+nnoremap <leader>f :NvimTreeToggle<Enter>
+endif
+
