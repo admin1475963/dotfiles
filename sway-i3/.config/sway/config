@@ -117,7 +117,6 @@ bindsym --to-code {
         $mod+Return exec alacritty
         $mod+m      exec bemenu-run | xargs swaymsg exec --
         $mod+Ctrl+p exec bash pass.sh
-        $mod+e      exec emacsclient -c -a 'emacs'
         $mod+w      exec bash qutebrowser-launcher.sh
         $mod+Ctrl+w exec chromium
         $mod+Ctrl+t exec telegram-desktop --
@@ -126,7 +125,6 @@ bindsym --to-code {
         $mod+Ctrl+s exec bash -c "grim -g '$(slurp)' $HOME/Pictures/screenshots/$(date +'%F_%T.png')"
 }
 
-assign [app_id="emacs"] workspace number 2
 assign [class="(E|e)macs"] workspace number 2
 assign [app_id="org.kde.okular"] workspace number 3
 assign [class="okular"] workspace number 3
@@ -139,7 +137,6 @@ assign [app_id="org.inkscape.Inkscape"] workspace number 5
 assign [app_id="xournalpp"] workspace number 5
 assign [class="Gimp"] workspace number 5
 assign [app_id="org.telegram.desktop"] workspace number 6
-assign [app_id="evolution"] workspace number 6
 assign [app_id="zoom"] workspace number 7
 assign [class="zoom"] workspace number 7
 

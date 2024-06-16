@@ -95,7 +95,6 @@ bindsym $mod+Shift+o layout splitv
 bindsym $mod+Return exec alacritty
 bindsym $mod+m      exec dmenu_run | xargs i3-msg exec --
 bindsym $mod+Ctrl+p exec bash pass.sh
-bindsym $mod+e      exec emacsclient -c -a 'emacs'
 bindsym $mod+o      exec obsidian
 bindsym $mod+w      exec qutebrowser
 bindsym $mod+Ctrl+w exec brave
@@ -106,6 +105,8 @@ bindsym $mod+Ctrl+z exec bash $XDG_CONFIG_HOME/i3lock/i3lock.sh
 assign [class="(E|e)macs"] workspace number 2
 assign [class="obsidian"] workspace number 3
 assign [class="okular"] workspace number 3
+assign [class="Anki"] workspace number 3
+assign [class="KeePassXC"] workspace number 4
 assign [class="qutebrowser"] workspace number 4
 assign [class="(B|b)rave(-browser)?"] workspace number 4
 assign [class="libreoffice(\-.*)?"] workspace number 5
@@ -113,7 +114,6 @@ assign [class="(org.inkscape.)?Inkscape"] workspace number 5
 assign [class="xournalpp"] workspace number 5
 assign [class="Gimp"] workspace number 5
 assign [class="(telegram-desktop)|(TelegramDesktop)"] workspace number 6
-assign [class="(E|e)volution"] workspace number 6
 assign [class="zoom"] workspace number 7
 
 bindsym XF86AudioMute exec amixer sset Master toggle
