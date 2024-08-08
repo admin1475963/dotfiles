@@ -48,7 +48,7 @@
 ** Fonts
 
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'default-frame-alist '(font . "Hack Nerd Font 10"))
+  (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font 10"))
 #+END_SRC
 
 

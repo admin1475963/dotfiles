@@ -61,7 +61,6 @@ filetype indent on
 
 syntax enable
 
-if !exists('g:vscode')
 call plug#begin()
 Plug 'joshdick/onedark.vim'
 Plug 'lervag/vimtex'
@@ -80,5 +79,3 @@ require("nvim-tree").setup()
 EOF
 
 nnoremap <leader>f :NvimTreeToggle<Enter>
-endif
-

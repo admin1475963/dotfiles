@@ -103,6 +103,8 @@ bindsym $mod+Ctrl+m exec evolution
 bindsym $mod+Ctrl+z exec bash $XDG_CONFIG_HOME/i3lock/i3lock.sh
 
 assign [class="(E|e)macs"] workspace number 2
+assign [class="code-oss"] workspace number 2
+assign [class="jetbrains-idea-ce"] workspace number 2
 assign [class="obsidian"] workspace number 3
 assign [class="okular"] workspace number 3
 assign [class="Anki"] workspace number 3
@@ -123,7 +125,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -5%
 bindsym XF86MonBrightnessUp exec xbacklight +5%
 
 bar {
-    font pango:Hack Nerd Font Mono 9
+    font pango:JetBrainsMono Nerd Font Mono 9
     position top
     status_command i3status-rs $XDG_CONFIG_HOME/i3status-rust/config.toml
 }
