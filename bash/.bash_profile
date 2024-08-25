@@ -1,11 +1,10 @@
 source "$HOME/.bashrc"
 
-if [ "$(tty)" = "/dev/tty1" ]
+if [ "$(tty)" = "/dev/tty2" ]
 then
     startx
-elif [ "$(tty)" = "/dev/tty2" ]
+elif [ "$(tty)" = "/dev/tty3" ]
 then
     export QT_QPA_PLATFORM="wayland;xcb"
-    export _JAVA_AWT_WM_NONREPARENTING=1
     sway --unsupported-gpu
 fi
